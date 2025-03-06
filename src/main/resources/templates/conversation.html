@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Conversation</title>
+</head>
+<body>
+    <h1>Conversation</h1>
+    <form method="post" action="/conversation">
+        <label for="username">Nom :</label>
+        <input type="text" id="username" name="username" required/>
+        <label for="message">Message :</label>
+        <input type="text" id="message" name="message" required/>
+        <button type="submit">Envoyer</button>
+    </form>
+    <div th:if="${username}">
+        <p>Utilisateur : <span th:text="${username}"></span></p>
+        <p>Message envoyé : <span th:text="${message}"></span></p>
+        <p>Timestamp : <span th:text="${#temporals.format(timestamp, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+        <p>Citation : <span th:text="${reponse}"></span></p>
+    </div>
+    <div th:if="${error}">
+        <p style="color:red" th:text="${error}"></p>
+    </div>
+</body>
+</html>

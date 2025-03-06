@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des utilisateurs</h1>
+    <ul>
+        <li th:each="user : ${users}">
+            <a th:href="@{/admin/conversations(username=${user})}" th:text="${user}"></a>
+        </li>
+    </ul>
+    <div th:if="${conversations}">
+        <h2>Conversations pour <span th:text="${selectedUser}"></span></h2>
+        <table>
+            <tr>
+                <th>Message</th>
+                <th>Réponse</th>
+                <th>Date</th>
+            </tr>
+            <tr th:each="conv : ${conversations}">
+                <td th:text="${conv.message}"></td>
+                <td th:text="${conv.reponse}"></td>
+                <td th:text="${#temporals.format(conv.timestamp, 'dd/MM/yyyy HH:mm:ss')}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
